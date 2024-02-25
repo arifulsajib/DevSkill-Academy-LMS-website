@@ -10,7 +10,7 @@ Users will able to:
 
 ### Links
 
-- Live Site: [DevSkill-LMS](https://arifulsajib.github.io/tips-calculator-app/)
+- Live Site: [DevSkill-LMS](https://devskill-lms.netlify.app/)
 - Client Code: [Github](https://github.com/arifulsajib/DevSkill-Academy-LMS-website)
 - Server Code: [Github](https://github.com/arifulsajib/DevSkill-Academy-LMS-website-backend)
 
