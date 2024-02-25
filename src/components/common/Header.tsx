@@ -90,7 +90,7 @@ const Header = () => {
         {/* right side items */}
         <div className="navbar-end me-3">
           {/* change theme */}
-          <label className="swap swap-rotate">
+          <label className="swap swap-rotate me-6">
             <input
               type="checkbox"
               className="theme-controller"
@@ -107,6 +107,28 @@ const Header = () => {
               <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
             </svg>
           </label>
+          {/* Conditional profile or login */}
+          <div className="dropdown dropdown-end">
+            {/* image */}
+            <div tabIndex={0} role="button" className="avatar">
+              <div className="w-8 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+                <img src="https://res.cloudinary.com/dyms8bozd/image/upload/v1707772570/avatars/boy1pvazwhbsrysrweoa.jpg" />
+              </div>
+            </div>
+            {/* menu */}
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40" onClick={handleClick}>
+              <li>
+                <NavLink to="/profile" className={navLinkStyles}>
+                  profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/logout" className={navLinkStyles}>
+                  Logout
+                </NavLink>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
