@@ -5,8 +5,19 @@ import Coursepage from "./pages/Coursepage";
 import Breadcrumb from "./components/common/Breadcrumb";
 import NotFoundpage from "./pages/NotFoundpage";
 import Footer from "./components/common/Footer";
+import FullPageLoading from "./pages/FullPageLoading";
+import { useEffect, useState } from "react";
 
 function App() {
+  // Full page loading
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1700);
+  }, []);
+  if (loading) {
+    return <FullPageLoading />;
+  }
+
   return (
     <>
       <Router>

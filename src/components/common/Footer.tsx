@@ -1,10 +1,14 @@
+import { selectIsDark } from "../../Redux/features/theme/themeSlice";
+import { useAppSelector } from "../../Redux/hooks/hook";
+import logo from "../../assets/logo-resized-removebg.png";
 import logo2 from "../../assets/logo2-resized-removebg.png";
 
 const Footer = () => {
+  const isdark = useAppSelector(selectIsDark);
   return (
     <footer className="footer items-center p-4 bg-base-200">
       <aside className="items-center grid-flow-col">
-        <img src={logo2} alt="DevSkill" width={130} height={130} />
+        <img src={isdark ? logo : logo2} alt="DevSkill" width={130} height={130} />
         <p>Copyright © 2024 - All right reserved</p>
       </aside>
       <nav className="grid-flow-col gap-4 justify-self-center md:place-self-center md:justify-self-end me-1">
