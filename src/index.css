@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar .active {
+  @apply bg-base-300 text-base-content border-b-2 border-base-content !important;
+}
+
+.breadcrumbs .active {
+  @apply text-primary;
+}
+
+.navbar a {
+  @apply rounded-lg;
+}
