@@ -1,4 +1,4 @@
-import { selectIsDark } from "../../Redux/features/theme/themeSlice";
+import { selectIsDark } from "../../Redux/features/toggle/themeSlice";
 import { useAppSelector } from "../../Redux/hooks/hook";
 import logo from "../../assets/logo-resized-removebg.png";
 import logo2 from "../../assets/logo2-resized-removebg.png";

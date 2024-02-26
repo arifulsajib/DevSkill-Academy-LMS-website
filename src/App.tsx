@@ -28,6 +28,7 @@ function App() {
           <Route path="/courses" element={<Coursepage />}></Route>
           <Route path="*" element={<NotFoundpage />}></Route>
         </Routes>
+
         <Footer></Footer>
       </Router>
     </>

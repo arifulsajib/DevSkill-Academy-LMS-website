@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeReducer from "./features/theme/themeSlice";
+import themeReducer from "./features/toggle/themeSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
+import modalReducer from "./features/toggle/modalSlice";
 
 const persistConfig = {
   key: "root",
@@ -18,7 +19,8 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const configAppStore = configureStore({
   reducer: {
-    root: persistedReducer
+    root: persistedReducer,
+    modal: modalReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

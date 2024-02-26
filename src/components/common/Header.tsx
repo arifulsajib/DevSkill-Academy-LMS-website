@@ -3,7 +3,10 @@ import logo from "../../assets/logo-resized-removebg.png";
 import logo2 from "../../assets/logo2-resized-removebg.png";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks/hook";
-import { selectIsDark, toggleTheme } from "../../Redux/features/theme/themeSlice";
+import { selectIsDark, toggleTheme } from "../../Redux/features/toggle/themeSlice";
+import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
+import { toggleLoginModal } from "../../Redux/features/toggle/modalSlice";
 
 const Header = () => {
   // toggle theme
@@ -108,7 +111,7 @@ const Header = () => {
             </svg>
           </label>
           {/* Conditional profile or login */}
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end me-3">
             {/* image */}
             <div tabIndex={0} role="button" className="avatar">
               <div className="w-8 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
@@ -129,8 +132,15 @@ const Header = () => {
               </li>
             </ul>
           </div>
+          {/* Login */}
+          <button className={navLinkStyles} onClick={() => dispatch(toggleLoginModal())}>
+            Login
+          </button>
         </div>
       </div>
+
+      <LoginModal disableClickOutside={true} />
+      <RegisterModal disableClickOutside={true} />
     </header>
   );
 };
