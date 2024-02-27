@@ -7,11 +7,26 @@ import { selectIsDark, toggleTheme } from "../../Redux/features/toggle/themeSlic
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 import { toggleLoginModal } from "../../Redux/features/toggle/modalSlice";
+import { clearCredentials } from "../../Redux/features/auth/authSlice";
+import { useLogoutMutation } from "../../Redux/features/api/authApiSlice";
+import { Bounce, toast } from "react-toastify";
 
 const Header = () => {
   // toggle theme
   const isdark = useAppSelector(selectIsDark);
   const dispatch = useAppDispatch();
+
+  // toastify function
+  const notify = (textToShow: string) => {
+    toast(textToShow, {
+      position: "top-right",
+      autoClose: 4000,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      transition: Bounce
+    });
+  };
 
   // styles
   const navLinkStyles = "text-lg font-semibold hover:font-bold mx-1";
@@ -21,6 +36,24 @@ const Header = () => {
     const elem: any = document.activeElement;
     if (elem) {
       elem?.blur();
+    }
+  };
+
+  // Handle Logout
+  const [logout] = useLogoutMutation();
+  const handleLogout = async () => {
+    try {
+      const result: any = await logout({});
+      // clear credentials state
+      dispatch(clearCredentials());
+      if (result.error) {
+        notify(result.error.data.message);
+      } else {
+        notify("Logout Successful");
+      }
+    } catch (error: any) {
+      console.log(error);
+      notify(error.data.message);
     }
   };
 
@@ -125,10 +158,10 @@ const Header = () => {
                   profile
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/logout" className={navLinkStyles}>
+              <li className="mt-2">
+                <button className={navLinkStyles} onClick={handleLogout}>
                   Logout
-                </NavLink>
+                </button>
               </li>
             </ul>
           </div>

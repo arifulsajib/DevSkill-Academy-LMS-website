@@ -4,6 +4,8 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
 import modalReducer from "./features/toggle/modalSlice";
+import authReducer from "./features/auth/authSlice";
+import { apiSlice } from "./features/api/apiSlice";
 
 const persistConfig = {
   key: "root",
@@ -12,7 +14,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  theme: themeReducer
+  theme: themeReducer,
+  auth: authReducer
   //   add reducers that you want to persist
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -20,13 +23,14 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const configAppStore = configureStore({
   reducer: {
     root: persistedReducer,
-    modal: modalReducer
+    modal: modalReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false
-    }),
-  devTools: import.meta.env.REACT_APP_ENV !== "production"
+    }).concat(apiSlice.middleware),
+  devTools: import.meta.env.VITE_ENV !== "production"
 });
 
 export type RootState = ReturnType<typeof configAppStore.getState>;

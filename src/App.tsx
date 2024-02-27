@@ -7,6 +7,8 @@ import NotFoundpage from "./pages/NotFoundpage";
 import Footer from "./components/common/Footer";
 import FullPageLoading from "./pages/FullPageLoading";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   // Full page loading
@@ -20,6 +22,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <Router>
         <Header />
         <Breadcrumb />
@@ -28,7 +31,6 @@ function App() {
           <Route path="/courses" element={<Coursepage />}></Route>
           <Route path="*" element={<NotFoundpage />}></Route>
         </Routes>
-
         <Footer></Footer>
       </Router>
     </>
