@@ -28,7 +28,7 @@ const Header = () => {
     });
   };
 
-  // styles
+  // styles navlink
   const navLinkStyles = "text-lg font-semibold hover:font-bold mx-1";
 
   // navbar mobile dropdown not close fix
