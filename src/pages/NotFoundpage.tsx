@@ -2,7 +2,7 @@ import picNot from "../assets/404-Page-2.png";
 
 const NotFoundpage = () => {
   return (
-    <section className="container flex justify-center items-center" style={{ minHeight: "90vh" }}>
+    <section className="container flex justify-center items-center min-h-screen">
       <img src={picNot} alt="404 not fount" className="w-full object-cover" style={{ maxHeight: "600px", maxWidth: "600px" }} />
     </section>
   );

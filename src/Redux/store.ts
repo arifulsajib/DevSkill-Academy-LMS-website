@@ -5,6 +5,7 @@ import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
 import modalReducer from "./features/toggle/modalSlice";
 import authReducer from "./features/auth/authSlice";
+import usersReducer from "./features/auth/usersSlice";
 import { apiSlice } from "./features/api/apiSlice";
 
 const persistConfig = {
@@ -24,13 +25,14 @@ export const configAppStore = configureStore({
   reducer: {
     root: persistedReducer,
     modal: modalReducer,
-    [apiSlice.reducerPath]: apiSlice.reducer
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    users: usersReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false
     }).concat(apiSlice.middleware),
-  devTools: import.meta.env.VITE_ENV !== "production"
+  devTools: import.meta.env.VITE_ENV !== "production" ? true : false
 });
 
 export type RootState = ReturnType<typeof configAppStore.getState>;

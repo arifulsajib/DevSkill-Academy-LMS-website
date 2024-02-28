@@ -8,7 +8,7 @@ export interface User {
   name: string;
   mobile: string;
   email: string;
-  avater: Avater | string;
+  avater?: Avater;
   role: string;
   password: string;
 }

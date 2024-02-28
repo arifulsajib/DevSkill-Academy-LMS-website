@@ -10,6 +10,8 @@ import { toggleLoginModal } from "../../Redux/features/toggle/modalSlice";
 import { clearCredentials } from "../../Redux/features/auth/authSlice";
 import { useLogoutMutation } from "../../Redux/features/api/authApiSlice";
 import { Bounce, toast } from "react-toastify";
+import { selectCurrentUser, setUser } from "../../Redux/features/auth/usersSlice";
+import ForgetPassModal from "./ForgetPassModal";
 
 const Header = () => {
   // toggle theme
@@ -40,26 +42,30 @@ const Header = () => {
   };
 
   // Handle Logout
-  const [logout] = useLogoutMutation();
+  const [logout, { isLoading }] = useLogoutMutation();
   const handleLogout = async () => {
     try {
       const result: any = await logout({});
-      // clear credentials state
-      dispatch(clearCredentials());
       if (result.error) {
-        notify(result.error.data.message);
+        notify("Unauthorized, Please Login first");
       } else {
+        // clear credentials state
+        dispatch(clearCredentials());
+        // clear user state
+        dispatch(setUser(null));
         notify("Logout Successful");
       }
     } catch (error: any) {
-      console.log(error);
-      notify(error.data.message);
+      notify("A server error occurred");
     }
   };
 
+  //current user
+  const user = useAppSelector(selectCurrentUser);
+
   return (
     <header>
-      <div className="navbar bg-base-200 bg-opacity-50 backdrop-blur-md shadow-lg fixed top-0 py-0">
+      <div className="navbar bg-base-200 bg-opacity-50 backdrop-blur-md shadow-lg fixed top-0 py-0 z-10">
         <div className="navbar-start">
           {/* Responsive Menu */}
           <div className="dropdown">
@@ -143,37 +149,43 @@ const Header = () => {
               <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
             </svg>
           </label>
-          {/* Conditional profile or login */}
-          <div className="dropdown dropdown-end me-3">
-            {/* image */}
-            <div tabIndex={0} role="button" className="avatar">
-              <div className="w-8 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
-                <img src="https://res.cloudinary.com/dyms8bozd/image/upload/v1707772570/avatars/boy1pvazwhbsrysrweoa.jpg" />
+          {
+            /* Conditional profile or login */
+            user ? (
+              <div className="dropdown dropdown-end me-3">
+                {/* image */}
+                <div tabIndex={0} role="button" className="avatar">
+                  <div className="w-8 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+                    <img src={user?.avater?.url || import.meta.env.VITE_DEFAULT_AVATER} />
+                  </div>
+                </div>
+                {/* menu */}
+                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40" onClick={handleClick}>
+                  <li>
+                    <NavLink to="/profile" state={{ fromLogin: true }} className={navLinkStyles}>
+                      profile
+                    </NavLink>
+                  </li>
+                  <li className="mt-2">
+                    <button className={navLinkStyles} onClick={handleLogout} disabled={isLoading}>
+                      {isLoading ? <span className="loading loading-spinner loading-sm"></span> : "Logout"}
+                    </button>
+                  </li>
+                </ul>
               </div>
-            </div>
-            {/* menu */}
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40" onClick={handleClick}>
-              <li>
-                <NavLink to="/profile" className={navLinkStyles}>
-                  profile
-                </NavLink>
-              </li>
-              <li className="mt-2">
-                <button className={navLinkStyles} onClick={handleLogout}>
-                  Logout
-                </button>
-              </li>
-            </ul>
-          </div>
-          {/* Login */}
-          <button className={navLinkStyles} onClick={() => dispatch(toggleLoginModal())}>
-            Login
-          </button>
+            ) : (
+              // login
+              <button className={navLinkStyles} onClick={() => dispatch(toggleLoginModal())}>
+                Login
+              </button>
+            )
+          }
         </div>
       </div>
 
       <LoginModal disableClickOutside={true} />
       <RegisterModal disableClickOutside={true} />
+      <ForgetPassModal disableClickOutside={true} />
     </header>
   );
 };

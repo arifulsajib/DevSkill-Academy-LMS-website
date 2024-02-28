@@ -1,13 +1,14 @@
 import cn from "classnames";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks/hook";
-import { getLoginOpen, toggleLoginModal, toggleRegisterModal } from "../../Redux/features/toggle/modalSlice";
+import { getLoginOpen, toggleForgetPassModal, toggleLoginModal, toggleRegisterModal } from "../../Redux/features/toggle/modalSlice";
 import { useState } from "react";
 import { FormikProps, useFormik } from "formik";
 import { loginSchema } from "../../validations/loginSchema";
 import { useLoginMutation } from "../../Redux/features/api/authApiSlice";
 import { setCredentials } from "../../Redux/features/auth/authSlice";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import { setUser } from "../../Redux/features/auth/usersSlice";
 
 interface Props {
   disableClickOutside?: boolean;
@@ -54,8 +55,9 @@ const LoginModal = ({ disableClickOutside }: Props) => {
     try {
       const userData = await login(values).unwrap();
       dispatch(setCredentials({ ...userData }));
+      dispatch(setUser({ ...userData.user }));
       actions.resetForm();
-      navigate(location?.state?.from || "/profile");
+      navigate(location?.state?.from?.pathname || "/");
       dispatch(toggleLoginModal());
       setErrors({ serverError: "" });
       notify("Login Successful");
@@ -105,10 +107,16 @@ const LoginModal = ({ disableClickOutside }: Props) => {
 
           {errors.serverError && <p className="text-red-600 mt-2">{errors.serverError}</p>}
           <button className="btn btn-primary w-full mt-5" type="submit" disabled={isSubmitting || isLoading}>
-            Login
+            {isLoading ? <span className="loading loading-spinner loading-sm"></span> : "Login"}
           </button>
         </form>
 
+        <div className="flex mt-3 justify-center">
+          <h3 className="text-lg me-2">Forgot Password?</h3>
+          <button type="submit" className="btn btn-xs btn-secondary" onClick={() => dispatch(toggleForgetPassModal())}>
+            Reset Password
+          </button>
+        </div>
         <div className="flex mt-3 justify-center">
           <h3 className="text-lg me-2">Don't have an account?</h3>
           <button type="submit" className="btn btn-xs btn-primary" onClick={() => dispatch(toggleRegisterModal())}>
