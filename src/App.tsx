@@ -14,6 +14,7 @@ import { useGetUserProfileQuery } from "./Redux/features/api/usersApiSlice";
 import { setUser } from "./Redux/features/auth/usersSlice";
 import Profilepage from "./pages/Profilepage";
 import RequireAuth from "./pages/RequireAuth";
+import ResetPassPage from "./pages/ResetPassPage";
 
 function App() {
   // get current user profile
@@ -43,6 +44,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<Homepage />} />
           <Route path="/courses" element={<Coursepage />} />
+          <Route path="/resetpass/:userId/:resetString" element={<ResetPassPage />} />
           <Route element={<RequireAuth roles={["user", "admin"]} />}>
             <Route path="/profile" element={<Profilepage />} />
           </Route>
