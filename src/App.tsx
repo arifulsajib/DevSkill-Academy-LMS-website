@@ -43,7 +43,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<Homepage />} />
           <Route path="/courses" element={<Coursepage />} />
-          <Route element={<RequireAuth roles={["user"]} />}>
+          <Route element={<RequireAuth roles={["user", "admin"]} />}>
             <Route path="/profile" element={<Profilepage />} />
           </Route>
           <Route path="*" element={<NotFoundpage />} />

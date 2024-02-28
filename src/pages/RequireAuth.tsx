@@ -6,16 +6,18 @@ import { toggleLoginModal } from "../Redux/features/toggle/modalSlice";
 import Loading from "../components/common/Loading";
 
 interface Props {
-  roles: [string];
+  roles: [string, string];
 }
 const RequireAuth = ({ roles }: Props) => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(selectCurrentToken);
-  const { data: user, isLoading } = useGetUserProfileQuery();
+  const { data: user, isLoading, isSuccess } = useGetUserProfileQuery();
   const userRole = user?.role || "";
   const location = useLocation();
 
-  if (isLoading) {
+  if (token && !isSuccess) {
+    return <Loading />;
+  } else if (isLoading) {
     return <Loading />;
   }
 

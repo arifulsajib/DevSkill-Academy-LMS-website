@@ -93,7 +93,7 @@ const ForgetPassModal = ({ disableClickOutside }: Props) => {
 
         <div className="flex mt-3 justify-center">
           <h3 className="text-lg me-2">Remembered Password? Go to Login.</h3>
-          <button type="submit" className="btn btn-xs btn-primary" onClick={() => dispatch(toggleLoginModal())}>
+          <button type="submit" className="btn btn-xs btn-secondary" onClick={() => dispatch(toggleLoginModal())}>
             Login
           </button>
         </div>

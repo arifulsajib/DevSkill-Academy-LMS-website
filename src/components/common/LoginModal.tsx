@@ -57,7 +57,9 @@ const LoginModal = ({ disableClickOutside }: Props) => {
       dispatch(setCredentials({ ...userData }));
       dispatch(setUser({ ...userData.user }));
       actions.resetForm();
-      navigate(location?.state?.from?.pathname || "/");
+      if (location?.state?.from?.pathname) {
+        navigate(location?.state?.from?.pathname);
+      }
       dispatch(toggleLoginModal());
       setErrors({ serverError: "" });
       notify("Login Successful");
@@ -119,7 +121,7 @@ const LoginModal = ({ disableClickOutside }: Props) => {
         </div>
         <div className="flex mt-3 justify-center">
           <h3 className="text-lg me-2">Don't have an account?</h3>
-          <button type="submit" className="btn btn-xs btn-primary" onClick={() => dispatch(toggleRegisterModal())}>
+          <button type="submit" className="btn btn-xs btn-secondary" onClick={() => dispatch(toggleRegisterModal())}>
             Register
           </button>
         </div>
