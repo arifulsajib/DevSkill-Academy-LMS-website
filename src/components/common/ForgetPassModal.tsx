@@ -51,7 +51,7 @@ const ForgetPassModal = ({ disableClickOutside }: Props) => {
       notify(result.message);
     } catch (error: any) {
       setErrors({ serverError: error?.data?.message });
-      notify(error.data.message);
+      notify(error?.data?.message);
     }
   };
 

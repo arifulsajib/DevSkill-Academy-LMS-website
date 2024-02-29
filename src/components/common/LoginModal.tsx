@@ -65,7 +65,7 @@ const LoginModal = ({ disableClickOutside }: Props) => {
       notify("Login Successful");
     } catch (error: any) {
       setErrors({ serverError: error?.data?.message });
-      notify(error.data.message);
+      notify(error?.data?.message);
     }
   };
 

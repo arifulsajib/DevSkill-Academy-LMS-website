@@ -16,7 +16,6 @@ interface InitialValues {
 
 const ResetPassPage = () => {
   const { userId, resetString } = useParams();
-  //   console.log(userId, resetString);
   //   toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
 
@@ -67,7 +66,7 @@ const ResetPassPage = () => {
   });
 
   return (
-    <section className="min-h-screen">
+    <section className="px-2 md:px-4 min-h-screen">
       <h1 className="text-2xl font-bold mt-2 text-center">Reset Password</h1>
       <div className="flex justify-center">
         <form className="my-6" onSubmit={handleSubmit}>
