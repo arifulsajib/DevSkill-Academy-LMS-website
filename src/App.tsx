@@ -1,5 +1,5 @@
 import Header from "./components/common/Header";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Coursepage from "./pages/Coursepage";
 import Breadcrumb from "./components/common/Breadcrumb";
@@ -15,6 +15,10 @@ import { setUser } from "./Redux/features/auth/usersSlice";
 import Profilepage from "./pages/Profilepage";
 import RequireAuth from "./pages/RequireAuth";
 import ResetPassPage from "./pages/ResetPassPage";
+import ProfileInfo from "./components/profilepage/ProfileInfo";
+import ChangePassword from "./components/profilepage/ChangePassword";
+import EnrolledCourses from "./components/profilepage/EnrolledCourses";
+import OrderHistory from "./components/profilepage/OrderHistory";
 
 function App() {
   // get current user profile
@@ -46,7 +50,13 @@ function App() {
           <Route path="/courses" element={<Coursepage />} />
           <Route path="/resetpass/:userId/:resetString" element={<ResetPassPage />} />
           <Route element={<RequireAuth roles={["user", "admin"]} />}>
-            <Route path="/profile" element={<Profilepage />} />
+            <Route path="/profile" element={<Profilepage />}>
+              <Route index element={<Navigate to="info" replace />} />
+              <Route path="info" element={<ProfileInfo />} />
+              <Route path="change-pass" element={<ChangePassword />} />
+              <Route path="courses" element={<EnrolledCourses />} />
+              <Route path="order-history" element={<OrderHistory />} />
+            </Route>
           </Route>
           <Route path="*" element={<NotFoundpage />} />
         </Routes>
