@@ -18,8 +18,22 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     getAllUsers: builder.query<Users, void>({
       query: () => "/user/allUsers"
       //   keepUnusedDataFor: 5
+    }),
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: "/user/profile",
+        method: "PUT",
+        body: data
+      })
+    }),
+    updatePassword: builder.mutation({
+      query: (data) => ({
+        url: "/user/updatePass",
+        method: "PUT",
+        body: data
+      })
     })
   })
 });
 
-export const { useGetUserProfileQuery, useGetAllUsersQuery } = usersApiSlice;
+export const { useGetUserProfileQuery, useGetAllUsersQuery, useUpdateProfileMutation, useUpdatePasswordMutation } = usersApiSlice;

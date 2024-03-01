@@ -4,7 +4,7 @@ import Sidebar from "../components/profilepage/Sidebar";
 const Profilepage = () => {
   return (
     <section className="min-h-screen my-5 px-4 md:px-6">
-      <div className="grid grid-cols-12 gap-2">
+      <div className="grid grid-cols-12 gap-8">
         <div className="col-span-2 lg:col-span-3 shadow-lg shadow-black rounded overflow-hidden bg-base-300">
           <Sidebar />
         </div>

@@ -15,6 +15,7 @@ const Sidebar = () => {
     <>
       <div className="drawer lg:drawer-open">
         <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" checked={isDrawerOpen} readOnly />
+        {/* for small screen */}
         <div className="drawer-content flex flex-col items-center justify-center">
           {/* only icon sidebar */}
           <ul className="menu px-0 py-4 lg:hidden overflow-hidden  ">
@@ -48,6 +49,7 @@ const Sidebar = () => {
           </ul>
         </div>
 
+        {/* For large screen and side drawer */}
         <div className="drawer-side z-20 lg:z-0">
           <label htmlFor="sidebar-drawer" aria-label="close sidebar" className="drawer-overlay" onClick={handleClick}></label>
 
@@ -62,19 +64,19 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li onClick={handleClick}>
-              <NavLink to="change-pass" className="flex items-center my-3">
+              <NavLink to="change-pass" className="flex items-center my-3 py-4">
                 <i className="fa-solid fa-xl fa-lock text-base-content"></i>
                 <div className="text-[1.1rem] font-semibold ms-1">Change Password</div>
               </NavLink>
             </li>
             <li onClick={handleClick}>
-              <NavLink to="courses" className="flex items-center my-3">
+              <NavLink to="courses" className="flex items-center my-3 py-4">
                 <i className="fa-solid  fa-copyright fa-xl  text-base-content"></i>
                 <div className="text-[1.1rem] font-semibold ms-1">Enrolled Courses</div>
               </NavLink>
             </li>
             <li onClick={handleClick}>
-              <NavLink to="order-history" className="flex items-center my-3">
+              <NavLink to="order-history" className="flex items-center my-3 py-4">
                 <i className="fa-solid  fa-money-bill-transfer fa-xl  text-base-content"></i>
                 <div className="text-[1.1rem] font-semibold ms-1">Order History</div>
               </NavLink>

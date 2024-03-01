@@ -49,6 +49,7 @@ function App() {
           <Route index path="/" element={<Homepage />} />
           <Route path="/courses" element={<Coursepage />} />
           <Route path="/resetpass/:userId/:resetString" element={<ResetPassPage />} />
+
           <Route element={<RequireAuth roles={["user", "admin"]} />}>
             <Route path="/profile" element={<Profilepage />}>
               <Route index element={<Navigate to="info" replace />} />
@@ -58,6 +59,7 @@ function App() {
               <Route path="order-history" element={<OrderHistory />} />
             </Route>
           </Route>
+
           <Route path="*" element={<NotFoundpage />} />
         </Routes>
         <Footer />
