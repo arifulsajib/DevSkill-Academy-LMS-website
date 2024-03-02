@@ -82,6 +82,7 @@ const ProfileInfo = () => {
       setFieldValue("avater", base64);
     } else {
       setErrors({ avater: "Image not valid or more than 1MB" });
+      // setFieldValue("avater", "");
     }
   };
 
@@ -97,7 +98,7 @@ const ProfileInfo = () => {
           </label>
         </div>
       </div>
-      {errors.avater && touched.avater && <p className="text-red-600 mt-5 text-center">{errors.avater.toString()}</p>}
+      {errors.avater && <p className="text-red-600 mt-5 text-center">{errors.avater}</p>}
       <div className="grid grid-cols-6 gap-5 mt-10">
         {/* email */}
         <div className="col-span-6 md:col-span-3">

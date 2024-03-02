@@ -51,7 +51,7 @@ const ChangePassword = () => {
     validationSchema: changepassSchema,
     onSubmit: onSubmit
   });
-  console.log(values);
+
   return (
     <div className="lg:w-7/12 mx-auto">
       <h1 className="text-2xl font-bold text-center">Change Password</h1>
@@ -67,7 +67,7 @@ const ChangePassword = () => {
         {/* new password */}
         <label className="input input-bordered flex items-center gap-2 mt-5">
           <i className="fa-solid fa-key opacity-70"></i>
-          <input name="newPassword" type={showPassword ? "text" : "password"} className="grow overflow-hidden" placeholder="Enter Current Password" value={values.newPassword} onChange={handleChange} onBlur={handleBlur} />
+          <input name="newPassword" type={showPassword ? "text" : "password"} className="grow overflow-hidden" placeholder="Enter New Password" value={values.newPassword} onChange={handleChange} onBlur={handleBlur} />
 
           {showPassword ? <i className="fa-solid fa-eye opacity-70" onClick={() => setShowPassword(!showPassword)}></i> : <i className="fa-solid fa-eye-slash opacity-70" onClick={() => setShowPassword(!showPassword)}></i>}
         </label>
@@ -75,7 +75,7 @@ const ChangePassword = () => {
         {/* confirm new password */}
         <label className="input input-bordered flex items-center gap-2 mt-5">
           <i className="fa-solid fa-key opacity-70"></i>
-          <input name="confirmNewPassword" type={showPassword ? "text" : "password"} className="grow overflow-hidden" placeholder="Enter Current Password" value={values.confirmNewPassword} onChange={handleChange} onBlur={handleBlur} />
+          <input name="confirmNewPassword" type={showPassword ? "text" : "password"} className="grow overflow-hidden" placeholder="Confirm New Password" value={values.confirmNewPassword} onChange={handleChange} onBlur={handleBlur} />
 
           {showPassword ? <i className="fa-solid fa-eye opacity-70" onClick={() => setShowPassword(!showPassword)}></i> : <i className="fa-solid fa-eye-slash opacity-70" onClick={() => setShowPassword(!showPassword)}></i>}
         </label>
