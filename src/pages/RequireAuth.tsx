@@ -3,7 +3,7 @@ import { selectCurrentToken } from "../Redux/features/auth/authSlice";
 import { useGetUserProfileQuery } from "../Redux/features/api/usersApiSlice";
 import { Navigate, Outlet, useLocation } from "react-router";
 import { toggleLoginModal } from "../Redux/features/toggle/modalSlice";
-import Loading from "../components/common/Loading";
+import Loading from "../components/utils/Loading";
 
 interface Props {
   roles: [string, string];
