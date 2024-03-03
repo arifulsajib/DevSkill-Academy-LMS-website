@@ -7,9 +7,9 @@ import Pagination from "../components/utils/Pagination";
 
 const Coursepage = () => {
   const [page, setPage] = useState(1);
-  const [searchName, setSearchName] = useState("");
+  // const [searchName, setSearchName] = useState("");
 
-  const { data, isFetching, isLoading } = useGetAllCoursesQuery({ searchName, page });
+  const { data, isFetching, isLoading } = useGetAllCoursesQuery({ page });
   const courses = data?.results;
 
   return (
