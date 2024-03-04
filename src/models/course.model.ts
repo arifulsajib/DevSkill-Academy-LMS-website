@@ -13,13 +13,20 @@ interface Prerequisite {
   title: string;
 }
 
+interface ReviewReply {
+  user: User;
+  comment: string;
+}
+
 interface Review {
   _id: string;
   user: User;
   review: string;
-  commentReplies: [object];
+  commentReplies: ReviewReply[];
   rating: number;
   comment: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface Link {
@@ -27,13 +34,20 @@ interface Link {
   url: string;
 }
 
+interface QuestionReply {
+  user: User;
+  answer: string;
+}
+
 interface Question {
   user: User;
   question: string;
-  questionReplies: [object];
+  questionReplies: QuestionReply[];
+  createdAt: string;
+  updatedAt: string;
 }
 
-interface CourseLecture {
+export interface CourseLecture {
   _id: string;
   title: string;
   videoSection: string;

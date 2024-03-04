@@ -21,7 +21,7 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5
     }),
     getCourse: builder.query<CourseResponse, { id: string }>({
-      query: (id) => `/course/getCourse/${id}`,
+      query: ({ id }) => `/course/getCourse/${id}`,
       keepUnusedDataFor: 5
     })
   })
