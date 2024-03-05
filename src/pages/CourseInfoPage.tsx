@@ -4,14 +4,26 @@ import Ratings from "../components/utils/Ratings";
 import Loading from "../components/utils/Loading";
 import CourseContentList from "../components/common/CourseContentList";
 import TimeAgo from "react-timeago";
+import VideoPlayer from "../components/utils/VideoPlayer";
+import { useAppSelector } from "../Redux/hooks/hook";
+import { selectCurrentUser } from "../Redux/features/auth/usersSlice";
+import { Link } from "react-router-dom";
 
 const CourseInfoPage = () => {
   const params = useParams();
   const courseId = params?.courseId;
+  const user = useAppSelector(selectCurrentUser);
 
   const { data, isFetching, isLoading } = useGetCourseQuery({ id: courseId || "" });
   const course = data?.course;
   const tags = course?.tags.split(", ").join(" #");
+
+  const isPurchased = user?.courses?.find((course: any) => course?._id === courseId);
+
+  // handle order
+  const handleOrder = () => {
+    console.log("handle order");
+  };
 
   if (isLoading || isFetching) {
     return (
@@ -21,11 +33,13 @@ const CourseInfoPage = () => {
     );
   }
 
+  const discountPercentage = Math.round((((course?.estimatePrice || 0) - (course?.price || 0)) / (course?.estimatePrice || 0)) * 100);
+
   return (
     <section className="min-h-screen my-5 px-4 md:px-16">
       <div className="flex flex-col-reverse lg:flex-row">
         {/* couseInfo Side*/}
-        <div className="w-full lg:w-[75%]">
+        <div className="w-full lg:w-[65%]">
           <h1 className="text-2xl font-bold text-success">{course?.name}</h1>
           <p className="text-lg lg:w-9/12 my-3">{course?.description}</p>
           <div className="flex justify-between items-center pe-8">
@@ -115,7 +129,35 @@ const CourseInfoPage = () => {
         </div>
 
         {/* Demo Video and Fetures Side */}
-        <div className="w-full lg:w-[25%] relative mb-2">Demo video and features</div>
+        <div className="w-full lg:w-[35%] relative mb-2">
+          <div className="sticky top-[100px] left-0 w-full">
+            <VideoPlayer url={course?.demoUrl || ""} isDemo />
+
+            <div className="pt-5 flex items-center">
+              <h1 className="text-2xl font-bold">{course?.price === 0 ? "Free" : "$" + course?.price}</h1>
+              <h1 className="text-2xl font-bold line-through ms-3">${course?.estimatePrice}</h1>
+              <h1 className="text-2xl font-bold ms-6">{discountPercentage && discountPercentage}% OFF</h1>
+            </div>
+
+            <div className="mt-6">
+              {isPurchased ? (
+                <Link to={`/course-access/${course?._id}`} className="w-full">
+                  <button className="btn btn-error text-lg rounded-full">Enter Course</button>
+                </Link>
+              ) : (
+                <button className="btn btn-error text-lg font-semibold rounded-full" onClick={handleOrder}>
+                  Buy Now - {course?.price}$
+                </button>
+              )}
+            </div>
+            <div className="mt-6">
+              <p className="text-lg my-2">• Source code included</p>
+              <p className="text-lg my-2">• Full lifetime access</p>
+              <p className="text-lg my-2">• Certificate of completion</p>
+              <p className="text-lg my-2">• Premium Support</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

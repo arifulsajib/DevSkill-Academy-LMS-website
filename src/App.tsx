@@ -16,10 +16,10 @@ import { setUser } from "./Redux/features/auth/usersSlice";
 import Profilepage from "./pages/Profilepage";
 import RequireAuth from "./pages/RequireAuth";
 import ResetPassPage from "./pages/ResetPassPage";
-import ProfileInfo from "./components/profilepage/ProfileInfo";
-import ChangePassword from "./components/profilepage/ChangePassword";
-import EnrolledCourses from "./components/profilepage/EnrolledCourses";
-import OrderHistory from "./components/profilepage/OrderHistory";
+import ProfileInfo from "./components/Profile/ProfileInfo";
+import ChangePassword from "./components/Profile/ChangePassword";
+import EnrolledCourses from "./components/Profile/EnrolledCourses";
+import OrderHistory from "./components/Profile/OrderHistory";
 import CourseInfoPage from "./pages/CourseInfoPage";
 
 function App() {

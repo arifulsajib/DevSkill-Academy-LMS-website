@@ -63,8 +63,8 @@ export interface Course {
   _id: string;
   name: string;
   description: string;
-  price: string;
-  estimatePrice: string;
+  price: number;
+  estimatePrice: number;
   thumbnail: Thumbnail;
   tags: string;
   level: string;

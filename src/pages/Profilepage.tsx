@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import Sidebar from "../components/profilepage/Sidebar";
+import Sidebar from "../components/Profile/Sidebar";
 
 const Profilepage = () => {
   return (

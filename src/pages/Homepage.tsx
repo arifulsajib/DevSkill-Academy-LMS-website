@@ -1,6 +1,6 @@
-import HomeBanner from "../components/homepage/HomeBanner";
-import HomeCourses from "../components/homepage/HomeCourses";
-import HomeFeatures from "../components/homepage/HomeFeatures";
+import HomeBanner from "../components/Home/HomeBanner";
+import HomeCourses from "../components/Home/HomeCourses";
+import HomeFeatures from "../components/Home/HomeFeatures";
 
 const Homepage = () => {
   return (
