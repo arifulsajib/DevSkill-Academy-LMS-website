@@ -1,5 +1,6 @@
 import HomeBanner from "../components/Home/HomeBanner";
 import HomeCourses from "../components/Home/HomeCourses";
+import HomeFaq from "../components/Home/HomeFaq";
 import HomeFeatures from "../components/Home/HomeFeatures";
 
 const Homepage = () => {
@@ -8,6 +9,7 @@ const Homepage = () => {
       <HomeBanner />
       <HomeFeatures />
       <HomeCourses />
+      <HomeFaq />
     </section>
   );
 };

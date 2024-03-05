@@ -19,3 +19,16 @@ body {
 .navbar a {
   @apply rounded-lg;
 }
+
+/* scrollbar */
+::-webkit-scrollbar {
+  @apply bg-base-300 shadow-lg;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-base-100 shadow-lg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-base-200 rounded-lg shadow-lg;
+}

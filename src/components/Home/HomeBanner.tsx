@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import bannerImg from "../../assets/banner.png";
+import { useGetLayoutQuery } from "../../Redux/features/api/layoutApiSlice";
+import Loading from "../utils/Loading";
 
 const HomeBanner = () => {
+  const { data, isFetching, isLoading } = useGetLayoutQuery({ type: "Banner" });
+
   return (
     <section className="my-5">
       <div className="grid grid-cols-6 gap-2">
@@ -20,9 +24,7 @@ const HomeBanner = () => {
           </div>
         </div>
         {/* right image */}
-        <div className="col-span-6 lg:col-span-3 py-1">
-          <img src={bannerImg} alt="Banner Image" className="w-full object-cover" />
-        </div>
+        <div className="col-span-6 lg:col-span-3 py-1">{isFetching || isLoading ? <Loading /> : <img src={data?.layout?.banner.image.url || bannerImg} alt="Banner Image" className="w-full object-cover" />}</div>
       </div>
     </section>
   );

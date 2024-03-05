@@ -39,7 +39,7 @@ const CourseInfoPage = () => {
     <section className="min-h-screen my-5 px-4 md:px-16">
       <div className="flex flex-col-reverse lg:flex-row">
         {/* couseInfo Side*/}
-        <div className="w-full lg:w-[65%]">
+        <div className="w-full lg:w-[65%] lg:pe-3">
           <h1 className="text-2xl font-bold text-success">{course?.name}</h1>
           <p className="text-lg lg:w-9/12 my-3">{course?.description}</p>
           <div className="flex justify-between items-center pe-8">

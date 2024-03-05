@@ -21,6 +21,7 @@ import ChangePassword from "./components/Profile/ChangePassword";
 import EnrolledCourses from "./components/Profile/EnrolledCourses";
 import OrderHistory from "./components/Profile/OrderHistory";
 import CourseInfoPage from "./pages/CourseInfoPage";
+import HomeFaq from "./components/Home/HomeFaq";
 
 function App() {
   // get current user profile
@@ -57,6 +58,7 @@ function App() {
         <Breadcrumb />
         <Routes>
           <Route index path="/" element={<Homepage />} />
+          <Route path="/faq" element={<HomeFaq isRoute />} />
           <Route path="/courses" element={<Coursepage />} />
           <Route path="/courses/:courseId" element={<CourseInfoPage />} />
           <Route path="/resetpass/:userId/:resetString" element={<ResetPassPage />} />
