@@ -6,7 +6,7 @@ import { toggleLoginModal } from "../Redux/features/toggle/modalSlice";
 import Loading from "../components/utils/Loading";
 
 interface Props {
-  roles: [string, string];
+  roles: Array<string>;
 }
 const RequireAuth = ({ roles }: Props) => {
   const dispatch = useAppDispatch();

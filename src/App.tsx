@@ -22,6 +22,7 @@ import EnrolledCourses from "./components/Profile/EnrolledCourses";
 import OrderHistory from "./components/Profile/OrderHistory";
 import CourseInfoPage from "./pages/CourseInfoPage";
 import HomeFaq from "./components/Home/HomeFaq";
+import CourseAccessPage from "./pages/CourseAccessPage";
 
 function App() {
   // get current user profile
@@ -71,6 +72,7 @@ function App() {
               <Route path="courses" element={<EnrolledCourses />} />
               <Route path="order-history" element={<OrderHistory />} />
             </Route>
+            <Route path="/course-access/:courseId" element={<CourseAccessPage />} />
           </Route>
 
           <Route path="*" element={<NotFoundpage />} />

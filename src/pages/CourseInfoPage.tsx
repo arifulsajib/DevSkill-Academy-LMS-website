@@ -5,16 +5,23 @@ import Loading from "../components/utils/Loading";
 import CourseContentList from "../components/common/CourseContentList";
 import TimeAgo from "react-timeago";
 import VideoPlayer from "../components/utils/VideoPlayer";
-import { useAppSelector } from "../Redux/hooks/hook";
+import { useAppDispatch, useAppSelector } from "../Redux/hooks/hook";
 import { selectCurrentUser } from "../Redux/features/auth/usersSlice";
 import { Link } from "react-router-dom";
+import { toggleLoginModal, togglePaymentModal } from "../Redux/features/toggle/modalSlice";
+import PaymentModal from "../components/Payment/PaymentModal";
+import { useCreateOrderMutation } from "../Redux/features/api/ordersApiSlice";
+import { toast } from "react-toastify";
 
 const CourseInfoPage = () => {
   const params = useParams();
   const courseId = params?.courseId;
   const user = useAppSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
 
   const { data, isFetching, isLoading } = useGetCourseQuery({ id: courseId || "" });
+  const [createOrder, { isLoading: orderLoading }] = useCreateOrderMutation();
+
   const course = data?.course;
   const tags = course?.tags.split(", ").join(" #");
 
@@ -22,7 +29,22 @@ const CourseInfoPage = () => {
 
   // handle order
   const handleOrder = () => {
-    console.log("handle order");
+    if (!user) {
+      dispatch(toggleLoginModal());
+    } else {
+      dispatch(togglePaymentModal());
+    }
+  };
+
+  // handle free order
+  const handleFreeOrder = async () => {
+    if (!user) {
+      dispatch(toggleLoginModal());
+    } else {
+      await createOrder({ courseId: course?._id || "", payment_info: null });
+      toast("Payment Successful");
+      window.location.reload();
+    }
   };
 
   if (isLoading || isFetching) {
@@ -144,6 +166,10 @@ const CourseInfoPage = () => {
                 <Link to={`/course-access/${course?._id}`} className="w-full">
                   <button className="btn btn-error text-lg rounded-full">Enter Course</button>
                 </Link>
+              ) : course?.price === 0 ? (
+                <button className="btn btn-error text-lg font-semibold rounded-full" onClick={handleFreeOrder} disabled={orderLoading}>
+                  {orderLoading ? "Enrolling,Please wait.." : "Enroll for free"}
+                </button>
               ) : (
                 <button className="btn btn-error text-lg font-semibold rounded-full" onClick={handleOrder}>
                   Buy Now - {course?.price}$
@@ -159,6 +185,8 @@ const CourseInfoPage = () => {
           </div>
         </div>
       </div>
+
+      <>{user && <PaymentModal disableClickOutside={true} course={course} />}</>
     </section>
   );
 };

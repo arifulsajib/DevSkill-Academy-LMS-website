@@ -11,4 +11,5 @@ export interface User {
   avater?: Avater;
   role: string;
   password: string;
+  courses: string[];
 }
