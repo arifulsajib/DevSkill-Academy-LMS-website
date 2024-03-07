@@ -1,7 +1,7 @@
 import { useGetAllCoursesQuery } from "../../Redux/features/api/courseApiSlice";
 import { selectCurrentUser } from "../../Redux/features/auth/usersSlice";
 import { useAppSelector } from "../../Redux/hooks/hook";
-import CourseCard from "../common/CourseCard";
+import CourseCard from "../Course/CourseCard";
 import Loading from "../utils/Loading";
 
 const EnrolledCourses = () => {

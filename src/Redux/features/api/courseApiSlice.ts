@@ -1,4 +1,4 @@
-import { Course } from "../../../models/course.model";
+import { Course, CourseLecture } from "../../../models/course.model";
 import { apiSlice } from "./apiSlice";
 
 interface Courses {
@@ -14,6 +14,11 @@ interface CourseResponse {
   course: Course;
 }
 
+interface CourseContent {
+  message: string;
+  courseContent: CourseLecture[];
+}
+
 export const coursesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllCourses: builder.query<Courses, { searchName?: string; page?: number; limit?: number }>({
@@ -23,8 +28,12 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
     getCourse: builder.query<CourseResponse, { id: string }>({
       query: ({ id }) => `/course/getCourse/${id}`,
       keepUnusedDataFor: 5
+    }),
+    getCourseContent: builder.query<CourseContent, { id: string }>({
+      query: ({ id }) => `/course/getCourseContent/${id}`
+      // keepUnusedDataFor: 5
     })
   })
 });
 
-export const { useGetAllCoursesQuery, useGetCourseQuery } = coursesApiSlice;
+export const { useGetAllCoursesQuery, useGetCourseQuery, useGetCourseContentQuery } = coursesApiSlice;

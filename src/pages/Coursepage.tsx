@@ -2,7 +2,7 @@ import { useState } from "react";
 import SectionHeading from "../components/utils/SectionHeading";
 import { useGetAllCoursesQuery } from "../Redux/features/api/courseApiSlice";
 import Loading from "../components/utils/Loading";
-import CourseCard from "../components/common/CourseCard";
+import CourseCard from "../components/Course/CourseCard";
 import Pagination from "../components/utils/Pagination";
 
 const Coursepage = () => {

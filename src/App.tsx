@@ -14,7 +14,7 @@ import { useAppDispatch } from "./Redux/hooks/hook";
 import { useGetUserProfileQuery } from "./Redux/features/api/usersApiSlice";
 import { setUser } from "./Redux/features/auth/usersSlice";
 import Profilepage from "./pages/Profilepage";
-import RequireAuth from "./pages/RequireAuth";
+import RequireAuth from "./pages/Protection/RequireAuth";
 import ResetPassPage from "./pages/ResetPassPage";
 import ProfileInfo from "./components/Profile/ProfileInfo";
 import ChangePassword from "./components/Profile/ChangePassword";
@@ -23,6 +23,8 @@ import OrderHistory from "./components/Profile/OrderHistory";
 import CourseInfoPage from "./pages/CourseInfoPage";
 import HomeFaq from "./components/Home/HomeFaq";
 import CourseAccessPage from "./pages/CourseAccessPage";
+import BackToTopRouteLoad from "./components/utils/BackToTopRouteLoad";
+import VideoContent from "./components/Course/VideoContent";
 
 function App() {
   // get current user profile
@@ -55,6 +57,7 @@ function App() {
       />
       <ToastContainer />
       <Router>
+        <BackToTopRouteLoad />
         <Header />
         <Breadcrumb />
         <Routes>
@@ -72,7 +75,10 @@ function App() {
               <Route path="courses" element={<EnrolledCourses />} />
               <Route path="order-history" element={<OrderHistory />} />
             </Route>
-            <Route path="/course-access/:courseId" element={<CourseAccessPage />} />
+
+            <Route path="/course-access/:courseId" element={<CourseAccessPage />}>
+              <Route path=":videoId" element={<VideoContent />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFoundpage />} />

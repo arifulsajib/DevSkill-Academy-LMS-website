@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useGetCourseQuery } from "../Redux/features/api/courseApiSlice";
 import Ratings from "../components/utils/Ratings";
 import Loading from "../components/utils/Loading";
-import CourseContentList from "../components/common/CourseContentList";
+import CourseContentList from "../components/Course/CourseContentList";
 import TimeAgo from "react-timeago";
 import VideoPlayer from "../components/utils/VideoPlayer";
 import { useAppDispatch, useAppSelector } from "../Redux/hooks/hook";
@@ -153,7 +153,7 @@ const CourseInfoPage = () => {
         {/* Demo Video and Fetures Side */}
         <div className="w-full lg:w-[35%] relative mb-2">
           <div className="sticky top-[100px] left-0 w-full">
-            <VideoPlayer url={course?.demoUrl || ""} isDemo />
+            <VideoPlayer url={course?.demoUrl || ""} />
 
             <div className="pt-5 flex items-center">
               <h1 className="text-2xl font-bold">{course?.price === 0 ? "Free" : "$" + course?.price}</h1>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useGetAllCoursesQuery } from "../../Redux/features/api/courseApiSlice";
-import CourseCard from "../common/CourseCard";
+import CourseCard from "../Course/CourseCard";
 import Loading from "../utils/Loading";
 import SectionHeading from "../utils/SectionHeading";
 

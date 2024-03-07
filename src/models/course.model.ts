@@ -54,6 +54,7 @@ export interface CourseLecture {
   description: string;
   videoLength: number;
   videoPlayer: string;
+  videoUrl: string;
   suggestion: string;
   links: Link[];
   questions: Question[];

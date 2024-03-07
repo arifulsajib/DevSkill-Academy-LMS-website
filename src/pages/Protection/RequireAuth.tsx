@@ -1,9 +1,9 @@
-import { useAppDispatch, useAppSelector } from "../Redux/hooks/hook";
-import { selectCurrentToken } from "../Redux/features/auth/authSlice";
-import { useGetUserProfileQuery } from "../Redux/features/api/usersApiSlice";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks/hook";
+import { selectCurrentToken } from "../../Redux/features/auth/authSlice";
+import { useGetUserProfileQuery } from "../../Redux/features/api/usersApiSlice";
 import { Navigate, Outlet, useLocation } from "react-router";
-import { toggleLoginModal } from "../Redux/features/toggle/modalSlice";
-import Loading from "../components/utils/Loading";
+import { toggleLoginModal } from "../../Redux/features/toggle/modalSlice";
+import Loading from "../../components/utils/Loading";
 
 interface Props {
   roles: Array<string>;
