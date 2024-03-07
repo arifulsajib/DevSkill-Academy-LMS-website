@@ -1,8 +1,8 @@
 import { Accordion, AccordionItem, AccordionItemButton, AccordionItemHeading, AccordionItemPanel } from "react-accessible-accordion";
 import { CourseLecture } from "../../models/course.model";
 import "react-accessible-accordion/dist/fancy-example.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 interface Props {
   courseData: CourseLecture[];
