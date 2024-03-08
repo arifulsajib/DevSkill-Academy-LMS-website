@@ -18,7 +18,7 @@ interface ReviewReply {
   comment: string;
 }
 
-interface Review {
+export interface Review {
   _id: string;
   user: User;
   review: string;
@@ -34,12 +34,13 @@ interface Link {
   url: string;
 }
 
-interface QuestionReply {
+export interface QuestionReply {
   user: User;
   answer: string;
 }
 
-interface Question {
+export interface Question {
+  _id: string;
   user: User;
   question: string;
   questionReplies: QuestionReply[];

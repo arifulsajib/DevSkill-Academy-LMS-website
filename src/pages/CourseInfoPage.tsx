@@ -3,7 +3,6 @@ import { useGetCourseQuery } from "../Redux/features/api/courseApiSlice";
 import Ratings from "../components/utils/Ratings";
 import Loading from "../components/utils/Loading";
 import CourseContentList from "../components/Course/CourseContentList";
-import TimeAgo from "react-timeago";
 import VideoPlayer from "../components/utils/VideoPlayer";
 import { useAppDispatch, useAppSelector } from "../Redux/hooks/hook";
 import { selectCurrentUser } from "../Redux/features/auth/usersSlice";
@@ -12,6 +11,7 @@ import { toggleLoginModal, togglePaymentModal } from "../Redux/features/toggle/m
 import PaymentModal from "../components/Payment/PaymentModal";
 import { useCreateOrderMutation } from "../Redux/features/api/ordersApiSlice";
 import { toast } from "react-toastify";
+import ReviewCard from "../components/Course/ReviewCard";
 
 const CourseInfoPage = () => {
   const params = useParams();
@@ -26,6 +26,7 @@ const CourseInfoPage = () => {
   const tags = course?.tags.split(", ").join(" #");
 
   const isPurchased = user?.courses?.find((course: any) => course?._id === courseId);
+  const isAdmin = user?.role === "admin";
 
   // handle order
   const handleOrder = () => {
@@ -115,37 +116,8 @@ const CourseInfoPage = () => {
           </div>
           {course?.reviews &&
             [...course.reviews].reverse().map((review) => (
-              //Review
-              <div key={review._id} className="pb-4">
-                <div className="flex items-center">
-                  <img src={review.user?.avater?.url || import.meta.env.VITE_DEFAULT_AVATER} alt="" className="w-10 h-10 rounded-full" />
-                  <div className="ms-3">
-                    <div className="flex items-center">
-                      <p className="text-lg font-bold me-2">{review.user?.name.split(" ")[0]}</p>
-                      <Ratings rating={review.rating} />
-                    </div>
-                    <p>{review.review}</p>
-                    <p className="text-xs">
-                      <TimeAgo date={review.createdAt} minPeriod={60} />
-                    </p>
-                  </div>
-                </div>
-                {
-                  //review replies
-                  review.commentReplies &&
-                    [...review.commentReplies].reverse().map((commentReply, idx) => (
-                      <div className="flex items-center ms-10 mt-3" key={idx}>
-                        <img src={commentReply.user?.avater?.url || import.meta.env.VITE_DEFAULT_AVATER} alt="" className="w-10 h-10 rounded-full" />
-                        <div className="ms-3">
-                          <div className="flex items-center">
-                            <p className="text-lg font-bold me-2">{commentReply.user?.name.split(" ")[0]}</p>
-                            <i className="fa-solid fa-circle-check text-blue-700"></i>
-                          </div>
-                          <p>{commentReply.comment}</p>
-                        </div>
-                      </div>
-                    ))
-                }
+              <div key={review._id}>
+                <ReviewCard review={review} isInfoPage />
               </div>
             ))}
         </div>
@@ -162,7 +134,7 @@ const CourseInfoPage = () => {
             </div>
 
             <div className="mt-6">
-              {isPurchased ? (
+              {isPurchased || isAdmin ? (
                 <Link to={`/course-access/${course?._id}`} className="w-full">
                   <button className="btn btn-error text-lg rounded-full">Enter Course</button>
                 </Link>

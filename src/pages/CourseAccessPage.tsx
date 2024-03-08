@@ -13,7 +13,7 @@ const CourseAccessPage = () => {
   const courseId = params?.courseId;
 
   const { data: user, isFetching, isLoading, isSuccess } = useGetUserProfileQuery();
-  const { data: courseData, isFetching: isFetchingCourse, isLoading: isLoadingCourse } = useGetCourseContentQuery({ id: courseId || "" });
+  const { data: courseData, isFetching: isFetchingCourseData, isLoading: isLoadingCourseData } = useGetCourseContentQuery({ id: courseId || "" });
 
   // go to the first video if no videoId
   const navigate = useNavigate();
@@ -27,7 +27,8 @@ const CourseAccessPage = () => {
     return <Loading />;
   } else if (isSuccess) {
     const isPurchased = user?.courses?.find((course: any) => course?._id === courseId);
-    if (!isPurchased) {
+    const isAdmin = user?.role === "admin";
+    if (!isPurchased && !isAdmin) {
       return (
         <section className="min-h-screen my-5 px-4 md:px-16">
           <h1 className="text-2xl font-semibold text-error">You can't access this course</h1>
@@ -40,10 +41,10 @@ const CourseAccessPage = () => {
     <section className="min-h-screen my-5 px-4 md:px-16">
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-10 lg:col-span-8">
-          <Outlet context={[courseData?.courseContent]} />
+          <Outlet context={[courseData?.courseContent, isFetchingCourseData]} />
         </div>
         <div className="col-span-2 lg:col-span-4 shadow-lg shadow-black rounded overflow-hidden bg-base-300">
-          {isFetchingCourse || isLoadingCourse ? (
+          {isFetchingCourseData || isLoadingCourseData ? (
             <Loading />
           ) : (
             <div className="drawer drawer-end lg:drawer-open  w-full">
@@ -54,9 +55,9 @@ const CourseAccessPage = () => {
                   <i className="fa-solid fa-bars-staggered fa-xl"></i>
                 </label>
               </div>
-              <div className="drawer-side">
+              <div className="drawer-side z-30 lg:z-0">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay" onClick={() => setDrawerOpen(!isDrawerOpen)}></label>
-                <ul className="menu p-4 w-80 lg:w-96 min-h-full bg-base-300 text-base-content">
+                <ul className="menu p-4 w-80 lg:w-96 min-h-full bg-base-300 text-base-content pt-20 lg:pt-4">
                   <CourseContentList courseData={courseData?.courseContent || []} setDrawerOpen={setDrawerOpen} isDrawerOpen={isDrawerOpen} />
                 </ul>
               </div>

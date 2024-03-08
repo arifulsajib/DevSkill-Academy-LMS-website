@@ -27,13 +27,47 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
     }),
     getCourse: builder.query<CourseResponse, { id: string }>({
       query: ({ id }) => `/course/getCourse/${id}`,
-      keepUnusedDataFor: 5
+      keepUnusedDataFor: 5,
+      providesTags: ["Course"]
     }),
     getCourseContent: builder.query<CourseContent, { id: string }>({
-      query: ({ id }) => `/course/getCourseContent/${id}`
+      query: ({ id }) => `/course/getCourseContent/${id}`,
+      providesTags: ["CourseContent"]
       // keepUnusedDataFor: 5
+    }),
+    addQuestion: builder.mutation({
+      query: (body) => ({
+        url: `/course/addQuestion`,
+        method: "PUT",
+        body
+      }),
+      invalidatesTags: ["CourseContent"]
+    }),
+    addAnswer: builder.mutation({
+      query: (body) => ({
+        url: `/course/addReply`,
+        method: "PUT",
+        body
+      }),
+      invalidatesTags: ["CourseContent"]
+    }),
+    addReview: builder.mutation({
+      query: (body) => ({
+        url: `/course/addReview/${body.courseId}`,
+        method: "PUT",
+        body
+      }),
+      invalidatesTags: ["Course"]
+    }),
+    addReviewReply: builder.mutation({
+      query: (body) => ({
+        url: `/course/addReplyToReview`,
+        method: "PUT",
+        body
+      }),
+      invalidatesTags: ["Course"]
     })
   })
 });
 
-export const { useGetAllCoursesQuery, useGetCourseQuery, useGetCourseContentQuery } = coursesApiSlice;
+export const { useGetAllCoursesQuery, useGetCourseQuery, useGetCourseContentQuery, useAddQuestionMutation, useAddAnswerMutation, useAddReviewMutation, useAddReviewReplyMutation } = coursesApiSlice;
