@@ -25,6 +25,7 @@ import HomeFaq from "./components/Home/HomeFaq";
 import CourseAccessPage from "./pages/CourseAccessPage";
 import BackToTopRouteLoad from "./components/utils/BackToTopRouteLoad";
 import VideoContent from "./components/Course/VideoContent";
+import HomeFeatures from "./components/Home/HomeFeatures";
 
 function App() {
   // get current user profile
@@ -63,6 +64,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<Homepage />} />
           <Route path="/faq" element={<HomeFaq isRoute />} />
+          <Route path="/about" element={<HomeFeatures />} />
           <Route path="/courses" element={<Coursepage />} />
           <Route path="/courses/:courseId" element={<CourseInfoPage />} />
           <Route path="/resetpass/:userId/:resetString" element={<ResetPassPage />} />
